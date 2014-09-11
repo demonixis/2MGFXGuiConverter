@@ -1,4 +1,4 @@
-﻿<Window x:Class="_2MGFX_Converter.MainWindow"
+﻿<Window x:Class="MonoGameUtils.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="2MGFX Gui Converter" Height="177" Width="365" ResizeMode="NoResize" WindowStartupLocation="Manual" Icon="Icon.ico">
@@ -15,13 +15,10 @@
             <StackPanel Orientation="Vertical" Width="90" Margin="5, 0, 0, 0">
                 <TextBlock Text="Shader profile" Margin="0, 10, 0, 10" HorizontalAlignment="Left"/>
                 <ListBox x:Name="shaderProfile" SelectedIndex="0">
-                    <ListBoxItem Height="30">OpenGL</ListBoxItem>
                     <ListBoxItem Height="30">DirectX</ListBoxItem>
+                    <ListBoxItem Height="30">OpenGL</ListBoxItem>
+                    <ListBoxItem Height="30">PlayStation 4</ListBoxItem>
                 </ListBox>
-                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                    <CheckBox x:Name="usePrefix" IsChecked="False" Margin="0, 0, 5, 0" />
-                    <TextBlock Text="Use prefix ?" />
-                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

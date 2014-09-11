@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
 
-namespace _2MGFX_Converter
+namespace MonoGameUtils
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
@@ -60,14 +60,10 @@ namespace _2MGFX_Converter
         {
             if (e.Data is System.Windows.DataObject && ((System.Windows.DataObject)e.Data).ContainsFileDropList())
             {
-                bool hasValidFile = false;
-
                 foreach (string filePath in ((System.Windows.DataObject)e.Data).GetFileDropList())
                 {
                     if (filePath.Contains(".fx"))
                     {
-                        hasValidFile = true;
-
                         Process process = new Process();
                         process.StartInfo.Arguments = GetCommandArgs(filePath);
                         process.StartInfo.WorkingDirectory = _twoMGFXPath;
@@ -77,12 +73,8 @@ namespace _2MGFX_Converter
                     else
                     {
                         MessageBox.Show("This isn't a valid effect file", "Invalid file", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        return;
                     }
-                }
-
-                if (hasValidFile)
-                {
-                    MessageBox.Show("Conversion done", "Information", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
                 }
             }
         }
@@ -94,25 +86,32 @@ namespace _2MGFX_Converter
         /// <returns></returns>
         private string GetCommandArgs(string filePath)
         {
-            string profile = shaderProfile.SelectedIndex > 0 ? "dx11" : "ogl";
+            string profile = string.Empty;
+            string extra = " /Profile:";
 
-            // Shader profile
-            string extra = profile == "DX" ? " /DX11" : String.Empty;
+            switch (shaderProfile.SelectedIndex)
+            {
+                case 0:
+                    profile = "dx11";
+                    extra += "DirectX_11";
+                    break;
+                case 1:
+                    profile = "ogl";
+                    extra += "OpenGL";
+                    break;
+                case 2:
+                    profile = "ps4";
+                    extra += "PlayStation4";
+                    break;
+            }
             
             // Define the good extension
-            string mgsExt = "mgfxo";
-            if (usePrefix.IsChecked.Value == true)
-                mgsExt = String.Format("{0}.mgfxo", profile);
+            string mgsExt = String.Format("{0}.mgfxo", profile);
              
             // Define the new path
             string newFilePath = filePath.Replace("fx", mgsExt);
             
             return filePath + " " + newFilePath + extra;
-        }
-
-        private void usePrefix_Checked_1(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
