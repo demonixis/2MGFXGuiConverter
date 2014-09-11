@@ -1,12 +1,19 @@
 2MGFXGuiConverter
 =================
 
-A simple drag &amp; drop shader converter for 2MGFX. Convert all your effect without the use of command line, just with a simple drag & drop. You can select the profile you want (OpenGL or DirectX11).
+A drag'n drop shader converter to use with 2MGFX. Convert all your effects without the use of the command line. 
+
+Supported profiles:
+- DirectX
+- OpenGL
+- PlayStation 4
 
 ## How to use it ?
 
-Just compile it and place 2MGFX.exe (with all its dlls) in a folder named "2MGFX" or in the same folder. 
+Open the solution with Visual Studio and compile it. Place the executable in the 2MGFX folder (or in the top level) and open it. 
 
 ## About MonoGame project
 
-MonoGame is an OpenSource, OpenGL implementation of Microsoft's XNA 4 APIs, find [more information here](https://github.com/mono/MonoGame "MonoGame on github")
+[MonoGame](https://github.com/mono/MonoGame "MonoGame on github") is free and open source project. 
+
+MIT License
